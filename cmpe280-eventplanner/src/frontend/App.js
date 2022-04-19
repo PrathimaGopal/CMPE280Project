@@ -1,12 +1,13 @@
-import React from "react";
 import "./styles.css";
 import NavBeforeLogin from "./components/navBeforeLogin";
 
-export default function Login() {
+function App() {
   return (
     <div className="app">
       <NavBeforeLogin />
-      Login
+      Home Page
     </div>
   );
 }
+
+export default App;

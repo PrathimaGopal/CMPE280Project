@@ -1,10 +1,12 @@
 import React from "react";
 import "./styles.css";
+import NavBeforeLogin from "./components/navBeforeLogin";
 
 export default function ContactUs() {
   return (
-    <div class="link">
-      <h2>Contact Us</h2>
+    <div className="app">
+      <NavBeforeLogin />
+      Contact Us Page
     </div>
   );
 }

@@ -1,10 +1,12 @@
 import React from "react";
 import "./styles.css";
+import NavBeforeLogin from "./components/navBeforeLogin";
 
 export default function NewUser() {
   return (
-    <div class="link">
-      <h2>New User</h2>
+    <div className="app">
+      <NavBeforeLogin />
+      New user
     </div>
   );
 }
