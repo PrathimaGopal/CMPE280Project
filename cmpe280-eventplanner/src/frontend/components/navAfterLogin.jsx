@@ -9,7 +9,7 @@ export default function NavAfterLogin() {
       <br />
       <br />
       <nav className="tabs">
-        <Link to="/home">Home</Link> <Link to="/event">Event</Link>{" "}
+        <Link to="/event">Event</Link>{" "}
         <Link to="/catering">Catering</Link>{" "}
         <Link to="/decoration">Decoration</Link>{" "}
         <Link to="/others">Others</Link> <Link to="/cart">Shopping Cart</Link>{" "}
