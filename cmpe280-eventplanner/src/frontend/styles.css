@@ -1,0 +1,14 @@
+.carousel{
+  width: 50%;
+  height: 100px;
+  margin: auto;
+}
+
+.content{
+    text-align: center;
+}
+
+#logout{
+    color: blue;
+}
+

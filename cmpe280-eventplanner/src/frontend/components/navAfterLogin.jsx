@@ -12,8 +12,10 @@ export default function NavAfterLogin() {
         <Link to="/event">Event</Link>{" "}
         <Link to="/catering">Catering</Link>{" "}
         <Link to="/decoration">Decoration</Link>{" "}
-        <Link to="/others">Others</Link> <Link to="/cart">Shopping Cart</Link>{" "}
+        <Link to="/others">Others</Link> 
+        <Link to="/cart">Cart</Link>{" "}
         <Link to="/settings">Settings</Link>
+        <Link to="/logout">Logout</Link>
         <hr></hr>
       </nav>
     </div>
