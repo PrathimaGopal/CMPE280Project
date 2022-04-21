@@ -1,0 +1,20 @@
+.eventoptions{
+    font: Lato;
+}
+
+.addressbar{
+    width: 300px;
+    height: 30px;
+}
+
+select{
+    width: 310px;
+    height: 35px;
+}
+
+.eventoptions{
+    margin: 0px auto;
+    margin-left: 600px;
+}
+
+

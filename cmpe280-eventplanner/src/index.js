@@ -13,6 +13,7 @@ import Others from "./frontend/others";
 import Review from "./frontend/review";
 import Settings from "./frontend/settings";
 import Cart from "./frontend/cart.jsx";
+import Logout from "./frontend/logout";
 
 const rootElement = document.getElementById("root");
 render(
@@ -30,6 +31,7 @@ render(
       <Route path="newUser" element={<NewUser />} />
       <Route path="settings" element={<Settings />} />
       <Route path="cart" element={<Cart />} />
+      <Route path="logout" element={<Logout />} />
     </Routes>
   </BrowserRouter>,
   rootElement

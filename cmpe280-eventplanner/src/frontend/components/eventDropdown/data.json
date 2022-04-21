@@ -1,0 +1,100 @@
+[
+  {
+    "event": "Baby Shower",
+    "event_code": "bs",
+    "themes": [
+      {
+        "name": "Boy baby theme",
+        "code": "boy"
+      },
+      {
+        "name": "Girl baby theme",
+        "code": "girl"
+      },
+      {
+        "name": "Twins",
+        "code": "twin"
+      }
+    ]
+  },
+  {
+    "event": "Birthday",
+    "event_code": "bday",
+    "themes": [
+      {
+        "name": "Animal theme",
+        "code": "animal"
+      },
+      {
+        "name": "Super Heros theme",
+        "code": "hero"
+      },
+      {
+        "name": "Princess theme",
+        "code": "princess"
+      },
+      {
+        "name": "Teen birthday",
+        "code": "teen"
+      }
+    ]
+  },
+  {
+    "event": "House Warming",
+    "event_code": "house",
+    "themes": [
+      {
+        "name": "General",
+        "code": "general"
+      },
+      {
+        "name": "With Fun events",
+        "code": "funevents"
+      }
+    ]
+  },
+  {
+    "event": "Wedding",
+    "event_code": "wed",
+    "themes": [
+      {
+        "name": "Beach Wedding",
+        "code": "beach"
+      },
+      {
+        "name": "Modern Wedding",
+        "code": "modern"
+      },
+      {
+        "name": "Romantic Wedding",
+        "code": "romantic"
+      },
+      {
+        "name": "Traditional Wedding",
+        "code": "traditional"
+      }
+    ]
+  },
+  {
+    "event": "Party with a theme",
+    "event_code": "theme",
+    "themes": [
+      {
+        "name": "Harry potter party",
+        "code": "potter"
+      },
+      {
+        "name": "Jungle party",
+        "code": "jungle"
+      },
+      {
+        "name": "90s Retro party",
+        "code": "retro"
+      },
+      {
+        "name": "Sweet snow cone party",
+        "code": "snow"
+      }
+    ]
+  }
+]
