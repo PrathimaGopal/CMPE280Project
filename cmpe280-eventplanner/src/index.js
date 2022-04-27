@@ -2,18 +2,19 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
-import App from "./frontend/App";
-import Catering from "./frontend/catering";
-import ContactUs from "./frontend/contact";
-import Decoration from "./frontend/decoration";
-import Event from "./frontend/event";
-import Login from "./frontend/login";
-import NewUser from "./frontend/newuser";
-import Others from "./frontend/others";
-import Review from "./frontend/review";
-import Settings from "./frontend/settings";
-import Cart from "./frontend/cart.jsx";
-import Logout from "./frontend/logout";
+import App from "./frontend/pages/App";
+import Catering from "./frontend/pages/catering";
+import ContactUs from "./frontend/pages/contact";
+import Decoration from "./frontend/pages/decoration";
+import Event from "./frontend/pages/event";
+import Login from "./frontend/pages/login";
+import NewUser from "./frontend/pages/newuser";
+import Others from "./frontend/pages/others";
+import Review from "./frontend/pages/review";
+import Settings from "./frontend/pages/accounthistory";
+import Cart from "./frontend/pages/cart.jsx";
+import Logout from "./frontend/pages/logout";
+import AccountHistory from "./frontend/pages/accounthistory";
 
 const rootElement = document.getElementById("root");
 render(
@@ -29,8 +30,8 @@ render(
       <Route path="review" element={<Review />} />
       <Route path="login" element={<Login />} />
       <Route path="newUser" element={<NewUser />} />
-      <Route path="settings" element={<Settings />} />
       <Route path="cart" element={<Cart />} />
+      <Route path="accounthistory" element={<AccountHistory />} />
       <Route path="logout" element={<Logout />} />
     </Routes>
   </BrowserRouter>,

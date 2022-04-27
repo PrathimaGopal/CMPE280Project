@@ -1,5 +1,5 @@
 import React from 'react';
-import NavAfterLogin from './components/navAfterLogin';
+import NavAfterLogin from '../components/navbarComponent/navAfterLogin';
 
 export default function Cart() {
   return (

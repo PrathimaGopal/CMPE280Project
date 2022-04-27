@@ -1,7 +1,7 @@
 import "./styles.css";
-import images from "./components/images/image";
-import ImageCarousel from "./components/imagecarousel";
-import NavBeforeLogin from "./components/navBeforeLogin";
+import images from "../components/images/image";
+import ImageCarousel from "../components/imagecarousel";
+import NavBeforeLogin from "../components/navbarComponent/navBeforeLogin";
 
 function App() {
   return (

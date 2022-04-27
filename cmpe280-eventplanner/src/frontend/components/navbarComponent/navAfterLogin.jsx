@@ -14,7 +14,7 @@ export default function NavAfterLogin() {
         <Link to="/decoration">Decoration</Link>{" "}
         <Link to="/others">Others</Link> 
         <Link to="/cart">Cart</Link>{" "}
-        <Link to="/settings">Settings</Link>
+        <Link to="/accounthistory">Account History</Link>
         <Link to="/logout">Logout</Link>
         <hr></hr>
       </nav>

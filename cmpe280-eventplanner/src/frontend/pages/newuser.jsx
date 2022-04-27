@@ -1,12 +1,12 @@
 import React from "react";
 import "./styles.css";
-import NavBeforeLogin from "./components/navBeforeLogin";
+import NavBeforeLogin from "../components/navbarComponent/navBeforeLogin";
 
-export default function Review() {
+export default function NewUser() {
   return (
     <div className="app">
       <NavBeforeLogin />
-      Review
+      New user
     </div>
   );
 }

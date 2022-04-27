@@ -1,8 +1,8 @@
 import React from 'react';
 import './styles.css';
-import NavAfterLogin from './components/navAfterLogin';
+import NavAfterLogin from '../components/navbarComponent/navAfterLogin';
 
-export default function Settings() {
+export default function AccountHistory() {
   return (
     <div className="app">
       <NavAfterLogin />
