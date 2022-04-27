@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
-import NavAfterLogin from "./components/navAfterLogin";
-import ThemeDropdown from "./components/eventDropdown/themedropdown";
+import NavAfterLogin from "../components/navbarComponent/navAfterLogin";
+import ThemeDropdown from "../components/eventDropdown/themedropdown";
 
 
 export default function Event() {

@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "./components/navbar";
+import NavBar from "../components/navbarComponent/navbar";
 import "./styles.css";
 
 export default function Logout() {

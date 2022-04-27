@@ -1,5 +1,5 @@
 import Slider from "react-slick";
-import "./nav.css";
+import "./navbarComponent/nav.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 

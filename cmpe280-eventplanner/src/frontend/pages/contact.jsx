@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import NavBeforeLogin from "./components/navBeforeLogin";
+import NavBeforeLogin from "../components/navbarComponent/navBeforeLogin";
 
 export default function ContactUs() {
   return (
