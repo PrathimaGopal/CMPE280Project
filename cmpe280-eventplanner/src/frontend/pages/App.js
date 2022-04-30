@@ -8,7 +8,7 @@ import NewUser from "./NewUser";
 import Review from "./Review";
 import Cart from "./Cart";
 import Logout from "./Logout";
-import AccountHistory from "./AccountHistory";
+import AccountHistory from "./AccountHistory.jsx";
 import HomeContent from "./Home";
 import Events from "../components/event/Events";
 
