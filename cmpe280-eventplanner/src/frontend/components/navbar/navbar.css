@@ -1,10 +1,10 @@
-.title{
-  font-family: Lato,Helvetica,Arial,sans-serif;;
+.title {
+  font-family: Lato, Helvetica, Arial, sans-serif;
   color: white;
   font-size: 25px;
   font-weight: 10000;
   line-height: 2.6;
-  letter-spacing: .06em;
+  letter-spacing: 0.06em;
   margin: auto;
   display: flex;
   align-items: flex-start;
@@ -14,15 +14,15 @@
 }
 
 .tabs {
-  font-family: Lato,Helvetica,Arial,sans-serif;
+  font-family: Lato, Helvetica, Arial, sans-serif;
   text-align: center;
   color: white;
-  font-size: 20px; 
+  font-size: 20px;
 }
 
-a{
+.navBarLink {
   text-decoration: none;
-  color: white;
+  color: white !important;
   padding: 1.2em;
 }
 
@@ -30,6 +30,6 @@ a:hover {
   color: orange;
 }
 
-.nav{
-  background-color: #2F4F4F;
+.nav {
+  background-color: #2f4f4f;
 }

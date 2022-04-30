@@ -1,11 +1,11 @@
-import React from "react";
-import NavBar from "../components/navbarComponent/navbar";
+import React, { useEffect } from "react";
 import "./styles.css";
 
-export default function Logout() {
+export default function Logout(props) {
+  useEffect(() => props.setLoggedIn(false));
+
   return (
     <div className="content">
-      <NavBar />
       <h2> Your session is expired!!</h2>
       <br />
       <a href="/" id="logout">

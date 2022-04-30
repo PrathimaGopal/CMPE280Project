@@ -1,5 +1,5 @@
 import Slider from "react-slick";
-import "./navbarComponent/nav.css";
+import "./navbar/navbar.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -25,5 +25,3 @@ export default function ImageCarousel({ images }) {
     </div>
   );
 }
-
-
