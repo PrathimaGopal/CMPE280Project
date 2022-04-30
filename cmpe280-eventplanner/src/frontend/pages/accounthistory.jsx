@@ -1,12 +1,6 @@
-import React from 'react';
-import './styles.css';
-import NavAfterLogin from '../components/navbarComponent/navAfterLogin';
+import React from "react";
+import "./styles.css";
 
 export default function AccountHistory() {
-  return (
-    <div className="app">
-      <NavAfterLogin />
-      Settings
-    </div>
-  );
+  return <div className="app">Settings</div>;
 }
