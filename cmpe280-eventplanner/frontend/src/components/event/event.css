@@ -5,6 +5,7 @@
 body {
   margin: 0%;
   padding: 0%;
+  align-content: center;
   font-family: montserrat, arial, verdana;
 }
 
@@ -88,7 +89,7 @@ select {
   flex: 20%;
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .flex-container {
