@@ -1,7 +1,7 @@
 import React from "react";
 import "./event.css";
 import moment from "moment";
-import "antd/dist/antd.min.css";
+import "antd/dist/antd.css";
 import {
   Select,
   Radio,
