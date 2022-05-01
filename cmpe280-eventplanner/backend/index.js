@@ -35,20 +35,43 @@ router.route("/booking").get((req, res) => {
 });
 
 router.route("/createBooking").post((req, res) => {
+  console.log(
+    req.body.user_id,
+    req.body.event_type,
+    req.body.event_space,
+    req.body.guest_count,
+    req.body.event_date,
+    req.body.event_time,
+    req.body.city,
+    req.body.address,
+    req.body.cuisine,
+    req.body.decoration,
+    req.body.photography,
+    req.body.videography,
+    req.body.music,
+    req.body.total_cost
+  );
   DB.Booking.create({
-    user_id: 2,
-    occasion_id: 102,
-    capacity: 4,
-    address: "kaliyaperumal Veethi",
-    locality: "Ludhiyana",
-    date_Event: "2022-12-31",
-    budget_in_dollars: 999,
+    user_id: req.body.user_id,
+    event_type: req.body.event_type,
+    event_space: req.body.event_space,
+    guest_count: req.body.guest_count,
+    event_date: req.body.event_date,
+    event_time: req.body.event_time,
+    city: req.body.city,
+    address: req.body.address,
+    cuisine: req.body.cuisine,
+    decoration: req.body.decoration,
+    photography: req.body.photography,
+    videography: req.body.videography,
+    music: req.body.music,
+    total_cost: req.body.total_cost,
   })
     .then((results) => res.status(200).send(results))
     .catch((err) => {
       console.log(
         "Could not submit request for new booking. Please try again.",
-        err.message
+        err
       );
       return res
         .status(400)

@@ -6,9 +6,8 @@ import ContactUs from "./Contact";
 import Login from "./Login";
 import NewUser from "./NewUser";
 import Review from "./Review";
-import Cart from "./Cart";
 import Logout from "./Logout";
-import AccountHistory from "./AccountHistory";
+import AccountHistory from "../components/accounthistory/AccountHistory";
 import HomeContent from "./Home";
 import Events from "../components/event/Events";
 
@@ -26,7 +25,6 @@ function App() {
         <Route path="review" element={<Review />} />
         <Route path="login" element={<Login setLoggedIn={setLoggedIn} />} />
         <Route path="newUser" element={<NewUser />} />
-        <Route path="cart" element={<Cart />} />
         <Route path="accounthistory" element={<AccountHistory />} />
         <Route path="logout" element={<Logout setLoggedIn={setLoggedIn} />} />
       </Routes>
