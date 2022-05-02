@@ -68,7 +68,7 @@ export default function EventInput(props) {
           min={1}
           max={1000}
           defaultValue={1}
-          value={props.formData.guestCount}
+          value={props.formData.capacity}
           onChange={(value) =>
             props.setFormData({
               ...props.formData,

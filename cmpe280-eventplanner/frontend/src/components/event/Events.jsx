@@ -48,6 +48,7 @@ export default function Events() {
   const [cardExpiry, setCardExpiry] = useState();
   const [cardCVV, setCardCVV] = useState();
 
+
   const hideContents = () => {
     setContentVisible(false);
   };
@@ -147,6 +148,7 @@ export default function Events() {
   };
 
   const showButton = () => {
+    // console.log(cardNumber, cardCVV);
     return cardNumber && cardHolderName && cardExpiry && cardCVV
       ? ""
       : "disabled";
@@ -295,7 +297,6 @@ export default function Events() {
             Complete Payment
           </Button>
         </Drawer>
-        ;
       </div>
     );
   };
@@ -305,7 +306,7 @@ export default function Events() {
       <Result
         status="success"
         title="Request booked successfully"
-        subTitle="Booking number: 2017182818828182881. Blissful Event Planet team will reach out to you."
+        subTitle="Your booking is confirmed. Blissful Event Planet team will reach out to you."
         extra={[
           <Button type="primary" key="console" onClick={goBackToEvent}>
             Book another Event

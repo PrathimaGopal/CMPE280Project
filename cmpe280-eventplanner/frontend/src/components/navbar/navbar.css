@@ -1,7 +1,7 @@
 .title {
   font-family: Lato, Helvetica, Arial, sans-serif;
   color: white;
-  font-size: 25px;
+  font-size: 28px;
   font-weight: 10000;
   line-height: 2.6;
   letter-spacing: 0.06em;
@@ -11,6 +11,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.nav {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlZHoJ137f1W6k4n6tfEmU1spUK_HZB-erlg&usqp=CAU");
 }
 
 .tabs {
@@ -27,9 +31,13 @@
 }
 
 a:hover {
-  color: orange;
+  color: #FFD700 !important;
 }
 
 .nav {
   background-color: #2f4f4f;
+}
+
+.homepg{
+  margin-left: 70px;
 }

@@ -75,14 +75,16 @@ select {
 .progressbar {
   width: 400px;
   height: 10px;
-  background-color: gray;
   margin: 30px 30px;
+  background-color: whiteSmoke;
+  border-radius: 20px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25) inset;
 }
 
 .progressbar div {
   width: 33.3%;
   height: 100%;
-  background-color: rgb(98, 0, 255);
+  background-color: #5aabda;
 }
 
 .footer {

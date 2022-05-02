@@ -16,6 +16,7 @@ router.route("/booking").get((req, res) => {
     });
 });
 
+
 router.route("/createBooking").post((req, res) => {
   DB.Booking.create({
     user_id: req.body.user_id,
