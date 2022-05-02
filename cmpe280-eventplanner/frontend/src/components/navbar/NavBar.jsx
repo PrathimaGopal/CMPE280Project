@@ -30,9 +30,6 @@ export default function NavBeforeLogin(props) {
       <>
         <Link className="navBarLink" to="/event">
           Event
-        </Link>
-        <Link className="navBarLink" to="/cart">
-          Cart
         </Link>{" "}
         <Link className="navBarLink" to="/accounthistory">
           Account History
@@ -51,7 +48,6 @@ export default function NavBeforeLogin(props) {
   return (
     <div className="nav">
       <div className="title"> Blissful Event Planet </div>
-      <br />
       <br />
       <nav className="tabs">{renderMenuGroup()}</nav>
       <hr></hr>
