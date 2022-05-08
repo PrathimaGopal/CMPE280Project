@@ -1,24 +1,49 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./styles.css";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import url from "../urlconfig";
 
 export default function Login(props) {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = {
-      userName,
-      password,
-    };
-    console.log(data);
-  };
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
-  const onClick = () => {
-    props.setLoggedIn(true);
-    navigate("/event");
-  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErrorMessage(null);
+    const submitedEmail = emailRef.current.value;
+    const submitedPassword = passwordRef.current.value;
+
+    const loginPayload = {
+      userName : submitedEmail,
+      password : submitedPassword
+    }
+
+    
+    let loginResponse;
+    try{
+      setLoading(true);
+      loginResponse = await axios.post(`${url}/login`, loginPayload);
+      setLoading(false);
+    }catch(error){
+      setLoading(false);
+    }
+
+    if(loginResponse && !loginResponse.error){
+      await localStorage.setItem('token', loginResponse.token);
+      await localStorage.setItem('user_name', loginResponse.userName);
+      props.setLoggedIn(true);
+      navigate(`/event`)
+    }else{
+      let ems = loginResponse?.errorMessage?loginResponse?.errorMessage:"User is Unauthorized";
+      setErrorMessage(ems);
+    }
+  }
+
   return (
     <div className="app">
       <div className="text-center m-5-auto">
@@ -29,9 +54,9 @@ export default function Login(props) {
             <br />
             <input
               type="text"
-              name="first_name"
-              onChange={(e) => setUserName(e.target.value)}
+              name="email"
               required
+              ref={emailRef}
             />
           </p>
           <p>
@@ -43,15 +68,16 @@ export default function Login(props) {
             <input
               type="password"
               name="password"
-              onChange={(e) => setPassword(e.target.value)}
               required
+              ref={passwordRef}
             />
           </p>
           <p>
-            <button id="sub_btn" type="submit" onClick={onClick}>
+            <button id="sub_btn">
               Login
             </button>
           </p>
+          {errorMessage? <div id="errorMessage">{errorMessage}</div>:null}
         </form>
         <footer>
           <p>

@@ -47,7 +47,29 @@ const Booking = sequelize.define(
   }
 );
 
+const newuser = sequelize.define(
+  "newuser",
+  {
+    user_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    address: DataTypes.STRING,
+    city: DataTypes.STRING,
+    zipcode: DataTypes.STRING, 
+  },
+  {
+    tableName: "newuser",
+    timestamps: false,
+  }
+);
+
+
 module.exports = {
   sequelize,
   Booking,
+  newuser,
 };

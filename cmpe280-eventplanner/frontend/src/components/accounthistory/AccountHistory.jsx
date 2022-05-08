@@ -142,7 +142,7 @@ export default function AccountHistory() {
     })
       .then((res) => {
         if (res.status === 200) {
-          console.log("Booking Data of Events Booked : ", res.data);
+          //console.log("Booking Data of Events Booked : ", res.data);
           setBook(res.data);
         }
       })

@@ -15,7 +15,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
-    <div className="app">
+      <div className="app">
       <NavBeforeLogin loggedIn={loggedIn} />
       <Routes>
         <Route path="/" element={<HomeContent />} />
@@ -28,7 +28,7 @@ function App() {
         <Route path="accounthistory" element={<AccountHistory />} />
         <Route path="logout" element={<Logout setLoggedIn={setLoggedIn} />} />
       </Routes>
-    </div>
+    </div>    
   );
 }
 

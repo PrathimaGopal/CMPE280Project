@@ -2,6 +2,16 @@ const express = require("express");
 const router = express.Router();
 const DB = require("./model");
 const config = require("./config");
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "mysecret";
+
+const createToken = (email) => {
+  try{
+    return jwt.sign({email}, JWT_SECRET)
+  }catch(error){
+    return null;
+  }
+};
 
 /* GET home page. */
 router.get("/", (req, res) => {
@@ -15,7 +25,6 @@ router.route("/booking").get((req, res) => {
       console.log(err);
     });
 });
-
 
 router.route("/createBooking").post((req, res) => {
   DB.Booking.create({
@@ -44,6 +53,53 @@ router.route("/createBooking").post((req, res) => {
         .status(400)
         .send("Could not submit request for new booking. Please try again.");
     });
+});
+
+router.route("/createUser").post((req, res) => {
+  console.log(req.body);
+  DB.newuser
+    .create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      address: req.body.address,
+      city: req.body.city,
+      zipcode: req.body.zipcode,
+    })
+    .then((results) => res.status(200).send(results))
+    .catch((err) => {
+      console.log(
+        "Could not submit request for new user. Please try again.",
+        err
+      );
+      return res
+        .status(400)
+        .send("Could not submit request for new user. Please try again.");
+    });
+});
+
+router.route("/login").post(async (req, res) => {
+  const { userName, password } = req.body;
+  const loginData = await DB.newuser.findAll({
+    where: {
+      email : userName,
+      password : password
+    },
+  });
+
+  if(loginData.length == 0){
+    return res.status(404).send({
+      error : true,
+      errorMessage : "User not authorized"
+    })
+  };
+
+  const token = createToken(userName);
+  return res.status(200).send({
+    error : false,
+    token,
+    userName
+  });
 });
 
 module.exports = router;

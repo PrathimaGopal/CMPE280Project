@@ -1,36 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./styles.css";
 import { Link, useNavigate } from "react-router-dom";
+import url from "../urlconfig";
+import axios from "axios";
 
 export default function NewUser() {
-  const [userName, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [verifyPassword, setVerifyPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [zipcode, setZipcode] = useState("");
+  const userNameRef = useRef();
+  const userEmailRef = useRef();
+  const userPasswordRef = useRef();
+  const userVerifyPasswordRef = useRef();
+  const userStreetRef = useRef();
+  const userCityRef = useRef();
+  const userZipcodeRef = useRef();
   const navigate = useNavigate();
 
   // Handle Submit for the Form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
-    const data = {
-      userName,
-      email,
-      password,
-      verifyPassword,
-      address,
-      city,
-      zipcode,
+
+    const submitedName = userNameRef.current.value;
+    const submitedEmail = userEmailRef.current.value;
+    const submitedPassword = userPasswordRef.current.value;
+    const submitedVerifyPassword = userVerifyPasswordRef.current.value;
+    const submitedStreet = userStreetRef.current.value;
+    const submitedCity = userCityRef.current.value;
+    const submitedZipcode = userZipcodeRef.current.value;
+
+    const postFormData = {
+      name: submitedName,
+      email: submitedEmail,
+      password: submitedPassword,
+      address: submitedStreet,
+      city: submitedCity,
+      zipcode: submitedZipcode,
     };
-    console.log(data);
-    // Storing Data in Local Storage
-    const register = JSON.stringify(data);
-    localStorage.setItem("Registration", register);
+    const resp = await axios.post(`${url}/createUser`, postFormData);
     navigate("/login");
   };
+
   return (
     <div>
       <div className="text-center m-5-auto">
@@ -39,22 +46,12 @@ export default function NewUser() {
           <p>
             <label>Username</label>
             <br />
-            <input
-              type="text"
-              name="first_name"
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+            <input type="text" name="first_name" required ref={userNameRef} />
           </p>
           <p>
             <label>Email address</label>
             <br />
-            <input
-              type="email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <input type="email" name="email" required ref={userEmailRef} />
           </p>
           <p>
             <label>Password</label>
@@ -62,8 +59,8 @@ export default function NewUser() {
             <input
               type="password"
               name="password"
-              onChange={(e) => setPassword(e.target.value)}
               required
+              ref={userPasswordRef}
             />
           </p>
           <p>
@@ -72,39 +69,24 @@ export default function NewUser() {
             <input
               type="password"
               name="verifypassword"
-              onChange={(e) => setVerifyPassword(e.target.value)}
               required
+              ref={userVerifyPasswordRef}
             />
           </p>
           <p>
             <label>Street Address</label>
             <br />
-            <input
-              type="text"
-              name="address"
-              onChange={(e) => setAddress(e.target.value)}
-              required
-            />
+            <input type="text" name="address" required ref={userStreetRef} />
           </p>
           <p>
             <label>City</label>
             <br />
-            <input
-              type="text"
-              name="city"
-              onChange={(e) => setCity(e.target.value)}
-              required
-            />
+            <input type="text" name="city" required ref={userCityRef} />
           </p>
           <p>
             <label>Zipcode</label>
             <br />
-            <input
-              type="text"
-              name="zipcode"
-              onChange={(e) => setZipcode(e.target.value)}
-              required
-            />
+            <input type="text" name="zipcode" required ref={userZipcodeRef} />
           </p>
           <p>
             <input type="checkbox" name="checkbox" id="checkbox" required />

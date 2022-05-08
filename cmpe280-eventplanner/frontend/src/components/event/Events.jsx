@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./event.css";
 import Catering from "../catering/Catering";
 import EventInput from "./EventInput";
@@ -13,7 +13,13 @@ import axios from "axios";
 import { FastForwardFilled, FastBackwardFilled } from "@ant-design/icons";
 
 export default function Events() {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    !token && navigate('/login');
+  },[])
+
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
 
   console.log(page);
 
@@ -71,6 +77,8 @@ export default function Events() {
       //
     }
   }, [formData.photography, formData.videography, formData.music]);
+
+ 
 
   const PageDisplay = () => {
     if (page === 0) {
