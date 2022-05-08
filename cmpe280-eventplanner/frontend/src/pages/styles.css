@@ -13,6 +13,11 @@
   left: 75px;
 }
 
+#errorMessage {
+  color: red;
+  text-align: center;
+}
+
 #logout {
   color: blue;
 }
@@ -176,4 +181,15 @@ p {
 /***    Home Page     ***/
 .home-page-title {
   color: #222;
+}
+
+/***  Review Page ***/
+.review {
+  position: relative;
+  left: 100px;
+}
+#textboxid
+{
+    height:100px;
+    font-size:14pt;
 }
