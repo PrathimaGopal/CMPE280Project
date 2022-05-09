@@ -1,31 +1,25 @@
-//import React from "react";
-//import "./styles.css";
-
-//export default function Review() {
-  //return <div className="app">Review</div>;
-//}
-
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./styles.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Review(props) {
-  const [review, setReview] = useState("");
+  const commentRef = useRef();
+  const [successMessage, setSuccessMessage] = useState(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
-      review,
-      
+    setSuccessMessage(null);
+    const submitedComment = commentRef.current.value;
+    const commentPayload = {
+      review: submitedComment
     };
-    console.log(data);
+    console.log("payload is",commentPayload);
+    let msg = "Thanks for your Review";
+    setSuccessMessage(msg);
   };
-  const navigate = useNavigate();
 
-  const onClick = () => {
-    props.setAdd(true);
-    navigate("/event");
+ //const navigate = useNavigate();
 
-  };
   return (
     <div className="app">
       <div className="text-center m-5-auto">
@@ -37,15 +31,15 @@ export default function Review(props) {
             <input id="textboxid"
               type="text"
               name="comment"
-              onChange={(e) => setReview(e.target.value)}
-              required
+              ref={commentRef}
             />
           </p>
           <p>
-            <button id="sub_btn" type="submit" onClick={onClick}>
-              Add
+            <button id="sub_btn">
+              Post Review
             </button>
           </p>
+          <div id="successMessage">{successMessage}</div>
         </form>
         <footer> 
           <p>

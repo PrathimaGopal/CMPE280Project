@@ -193,3 +193,9 @@ p {
     height:100px;
     font-size:14pt;
 }
+
+#successMessage{
+  color:green;
+  text-align: center;
+  font-size: large;
+}
