@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./event.css";
 import Catering from "../catering/Catering";
 import EventInput from "./EventInput";
@@ -12,24 +12,21 @@ import axios from "axios";
 
 import { FastForwardFilled, FastBackwardFilled } from "@ant-design/icons";
 
-export default function Events(props) {
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    !token && navigate("/login");
-  }, []);
-
+export default function Events() {
   const [page, setPage] = useState(0);
-  const navigate = useNavigate();
 
   console.log(page);
 
   const resetData = () => {
     return {
       eventType: "",
+      theme:"",
+      themePrice:0,
       eventSpace: "",
       address: "",
       city: "",
-      guestCount: "",
+      guestCount:1,
+      cateringPrices:0,
       eventDate: "",
       eventTime: "",
       cuisine: "",
@@ -37,11 +34,13 @@ export default function Events(props) {
       photography: "No",
       videography: "No",
       music: "No",
+      totalprice:0
     };
   };
-
+  
   const [formData, setFormData] = useState(resetData());
-
+  const [cartData,setCartData]=useState([]);
+  
   const FormTitles = ["Event Details", "Catering", "Decoration", "Addons"];
   const NavTitles = ["Events", "Catering", "Decoration", "Addons", "Payment"];
 
@@ -56,8 +55,9 @@ export default function Events(props) {
 
   const hideContents = () => {
     setContentVisible(false);
+    
   };
-
+  
   const showResults = () => {
     hideContents();
     setResultVisible(true);
@@ -84,6 +84,8 @@ export default function Events(props) {
           visible={contentVisible}
           formData={formData}
           setFormData={setFormData}
+          cartData={cartData}
+          setCartData={setCartData}
         />
       );
     } else if (page === 1) {
@@ -92,6 +94,8 @@ export default function Events(props) {
           visible={contentVisible}
           formData={formData}
           setFormData={setFormData}
+          cartData={cartData}
+          setCartData={setCartData}
         />
       );
     } else if (page === 2) {
@@ -100,6 +104,8 @@ export default function Events(props) {
           visible={contentVisible}
           formData={formData}
           setFormData={setFormData}
+          cartData={cartData}
+          setCartData={setCartData}
         />
       );
     } else if (page === 3) {
@@ -108,17 +114,19 @@ export default function Events(props) {
           visible={contentVisible}
           formData={formData}
           setFormData={setFormData}
+          cartData={cartData}
+          setCartData={setCartData}
         />
       );
     }
   };
-
+  console.log("Add",cartData)
   const createBooking = () => {
     axios({
       url: `${url}/createBooking`,
       method: "post",
       data: {
-        user_id: props.user,
+        user_id: 2,
         event_type: formData.eventType,
         event_space: formData.eventSpace,
         guest_count: formData.guestCount,
@@ -126,12 +134,12 @@ export default function Events(props) {
         event_time: formData.eventTime,
         city: formData.city,
         address: formData.address,
-        cuisine: "Thai Menu",
-        decoration: "Beach Wedding",
+        cuisine: formData.cuisine,
+        decoration: formData.decoration,
         photography: formData.photography,
         videography: formData.videography,
         music: formData.music,
-        total_cost: 1000,
+        total_cost:cartData.reduce((sum,product)=>(sum+=product.price),0),
       },
     })
       .then((res) => {
@@ -153,7 +161,6 @@ export default function Events(props) {
   };
 
   const showButton = () => {
-    // console.log(cardNumber, cardCVV);
     return cardNumber && cardHolderName && cardExpiry && cardCVV
       ? ""
       : "disabled";
@@ -259,7 +266,7 @@ export default function Events(props) {
             </Space>
             <Space direction="horizontal">
               <Text style={{ marginRight: "5px" }}>Total Cost:</Text>
-              <Text>1000</Text>
+              <Text>${cartData.reduce((sum,product)=>(sum+=product.price),0)}</Text>
             </Space>
           </Space>
           <br />
@@ -302,6 +309,7 @@ export default function Events(props) {
             Complete Payment
           </Button>
         </Drawer>
+        ;
       </div>
     );
   };
@@ -311,7 +319,7 @@ export default function Events(props) {
       <Result
         status="success"
         title="Request booked successfully"
-        subTitle="Your booking is confirmed. Blissful Event Planet team will reach out to you."
+        subTitle="Booking number: 2017182818828182881. Blissful Event Planet team will reach out to you."
         extra={[
           <Button type="primary" key="console" onClick={goBackToEvent}>
             Book another Event
