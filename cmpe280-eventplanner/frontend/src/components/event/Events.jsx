@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./event.css";
 import Catering from "../catering/Catering";
@@ -12,11 +12,11 @@ import axios from "axios";
 
 import { FastForwardFilled, FastBackwardFilled } from "@ant-design/icons";
 
-export default function Events() {
+export default function Events(props) {
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    !token && navigate('/login');
-  },[])
+    const token = localStorage.getItem("token");
+    !token && navigate("/login");
+  }, []);
 
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
@@ -54,7 +54,6 @@ export default function Events() {
   const [cardExpiry, setCardExpiry] = useState();
   const [cardCVV, setCardCVV] = useState();
 
-
   const hideContents = () => {
     setContentVisible(false);
   };
@@ -77,8 +76,6 @@ export default function Events() {
       //
     }
   }, [formData.photography, formData.videography, formData.music]);
-
- 
 
   const PageDisplay = () => {
     if (page === 0) {
@@ -121,7 +118,7 @@ export default function Events() {
       url: `${url}/createBooking`,
       method: "post",
       data: {
-        user_id: 2,
+        user_id: props.user,
         event_type: formData.eventType,
         event_space: formData.eventSpace,
         guest_count: formData.guestCount,

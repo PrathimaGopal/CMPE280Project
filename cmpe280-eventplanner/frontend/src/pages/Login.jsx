@@ -5,7 +5,6 @@ import axios from "axios";
 import url from "../urlconfig";
 
 export default function Login(props) {
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const [loading, setLoading] = useState(false);
@@ -15,34 +14,37 @@ export default function Login(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorMessage(null);
-    const submitedEmail = emailRef.current.value;
-    const submitedPassword = passwordRef.current.value;
-
-    const loginPayload = {
-      userName : submitedEmail,
-      password : submitedPassword
-    }
-
-    
     let loginResponse;
-    try{
+    try {
       setLoading(true);
-      loginResponse = await axios.post(`${url}/login`, loginPayload);
+      loginResponse = await axios({
+        url: `${url}/login`,
+        method: "get",
+        params: {
+          user_name: emailRef.current.value,
+          password: passwordRef.current.value,
+        },
+        // credentials: 'include',
+      });
       setLoading(false);
-    }catch(error){
+    } catch (error) {
       setLoading(false);
     }
 
-    if(loginResponse && !loginResponse.error){
-      await localStorage.setItem('token', loginResponse.token);
-      await localStorage.setItem('user_name', loginResponse.userName);
+    if (loginResponse && !loginResponse.error) {
+      console.log("loginResponse - ", loginResponse);
+      await localStorage.setItem("token", loginResponse.token);
+      await localStorage.setItem("user_name", loginResponse.userName);
       props.setLoggedIn(true);
-      navigate(`/event`)
-    }else{
-      let ems = loginResponse?.errorMessage?loginResponse?.errorMessage:"User is Unauthorized";
+      props.setUser(loginResponse?.data?.userId);
+      navigate(`/event`);
+    } else {
+      let ems = loginResponse?.errorMessage
+        ? loginResponse?.errorMessage
+        : "User is Unauthorized";
       setErrorMessage(ems);
     }
-  }
+  };
 
   return (
     <div className="app">
@@ -52,12 +54,7 @@ export default function Login(props) {
           <p>
             <label>Username or Email Address</label>
             <br />
-            <input
-              type="text"
-              name="email"
-              required
-              ref={emailRef}
-            />
+            <input type="text" name="email" required ref={emailRef} />
           </p>
           <p>
             <label>Password</label>
@@ -65,19 +62,12 @@ export default function Login(props) {
               <label className="right-label">Forget password?</label>
             </Link>
             <br />
-            <input
-              type="password"
-              name="password"
-              required
-              ref={passwordRef}
-            />
+            <input type="password" name="password" required ref={passwordRef} />
           </p>
           <p>
-            <button id="sub_btn">
-              Login
-            </button>
+            <button id="sub_btn">Login</button>
           </p>
-          {errorMessage? <div id="errorMessage">{errorMessage}</div>:null}
+          {errorMessage ? <div id="errorMessage">{errorMessage}</div> : null}
         </form>
         <footer>
           <p>
