@@ -6,9 +6,9 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = "mysecret";
 
 const createToken = (email) => {
-  try{
-    return jwt.sign({email}, JWT_SECRET)
-  }catch(error){
+  try {
+    return jwt.sign({ email }, JWT_SECRET);
+  } catch (error) {
     return null;
   }
 };
@@ -82,24 +82,49 @@ router.route("/login").post(async (req, res) => {
   const { userName, password } = req.body;
   const loginData = await DB.newuser.findAll({
     where: {
-      email : userName,
-      password : password
+      email: userName,
+      password: password,
     },
   });
 
-  if(loginData.length == 0){
+  if (loginData.length == 0) {
     return res.status(404).send({
-      error : true,
-      errorMessage : "User not authorized"
-    })
-  };
+      error: true,
+      errorMessage: "User not authorized",
+    });
+  }
 
   const token = createToken(userName);
   return res.status(200).send({
-    error : false,
+    error: false,
     token,
-    userName
+    userName,
   });
+});
+
+router.route("/postReview").post((req, res) => {
+  console.log("***********", req.body);
+  DB.review
+    .create({
+      comment: req.body.comment,
+      rating: req.body.rating,
+      commented_by: req.body.commented_by,
+    })
+    .then((results) => res.status(200).send(results))
+    .catch((err) => {
+      console.log("Could not submit review for user. Please try again.", err);
+      return res
+        .status(400)
+        .send("Could not submit review for new user. Please try again.");
+    });
+});
+
+router.route("/reviewdata").get((req, res) => {
+  DB.review.findAll()
+    .then((cmntdata) => res.json(cmntdata))
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 module.exports = router;
