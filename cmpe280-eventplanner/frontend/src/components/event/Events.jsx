@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./event.css";
 import Catering from "../catering/Catering";
 import EventInput from "./EventInput";
@@ -9,12 +9,17 @@ import "antd/dist/antd.min.css";
 import { Drawer, Input, Button, Typography, Result, Space } from "antd";
 import url from "../../urlconfig";
 import axios from "axios";
-
 import { FastForwardFilled, FastBackwardFilled } from "@ant-design/icons";
 
-export default function Events() {
-  const [page, setPage] = useState(0);
 
+export default function Events(props) {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    !token && navigate("/login");
+  }, []);
+
+  const [page, setPage] = useState(0);
+  const navigate = useNavigate();
   console.log(page);
 
   const resetData = () => {
@@ -54,8 +59,7 @@ export default function Events() {
   const [cardCVV, setCardCVV] = useState();
 
   const hideContents = () => {
-    setContentVisible(false);
-    
+    setContentVisible(false);  
   };
   
   const showResults = () => {
@@ -126,7 +130,7 @@ export default function Events() {
       url: `${url}/createBooking`,
       method: "post",
       data: {
-        user_id: 2,
+        user_id: props.user,
         event_type: formData.eventType,
         event_space: formData.eventSpace,
         guest_count: formData.guestCount,
@@ -319,7 +323,7 @@ export default function Events() {
       <Result
         status="success"
         title="Request booked successfully"
-        subTitle="Booking number: 2017182818828182881. Blissful Event Planet team will reach out to you."
+        subTitle="Your booking is confirmed. Blissful Event Planet team will reach out to you."
         extra={[
           <Button type="primary" key="console" onClick={goBackToEvent}>
             Book another Event

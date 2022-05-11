@@ -53,7 +53,6 @@ export default function Addons(props) {
    props.setCartData([...arr])
  }
   const onChange = (list) => {
-    
     // Reset the prop values
     props.setFormData({
       ...props.formData,
@@ -71,21 +70,18 @@ export default function Addons(props) {
         props.setFormData({
           ...props.formData,
           photography: "Yes",
-          totalCost:1000
         });
         
       } else if (item === "Videography") {
         props.setFormData({
           ...props.formData,
           videography: "Yes",
-          totalCost:2000
         });
        
       } else if (item === "Music") {
         props.setFormData({
           ...props.formData,
           music: "Yes",
-          totalCost:3000
         });
        
       }
@@ -138,35 +134,72 @@ export default function Addons(props) {
         value={checkedList}
         onChange={onChange}
       />
+            <br />
+      <a
+        href="https://www.instagram.com/david_monn/?utm_source=ig_embed&ig_rid=9836b39a-db06-4f51-998b-61005a7f9cfc"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        Click here to view our Instagram page!!
+      </a>
+      <br />
       <div style={{ width: "400px", height: "300px" }}>
         {" "}
         <Carousel autoplay>
-          <div>
+        <div>
             <img
               style={contentStyle}
               src="https://media.istockphoto.com/photos/table-setting-for-an-event-party-or-wedding-reception-picture-id479977238?k=20&m=479977238&s=612x612&w=0&h=6yuuuuHTvosXEGwlPTdY8V4N95issAzrTTQ9ZKN1w3E="
-              alt="Wedding2"
+              alt="image1"
             />
           </div>
           <div>
             <img
               style={contentStyle}
-              src="https://www.themanorrestaurant.com/blog/wp-content/uploads/2018/07/Knowles-309-wedding-decor-1.jpg"
-              alt="Wedding1"
+              src="https://media.istockphoto.com/photos/birthday-celebratory-toast-with-string-lights-and-champagne-picture-id1298329918?k=20&m=1298329918&s=612x612&w=0&h=SJjCxNQqYZkXGryXlSCUKfs4mKF8-CzGgpLcNR82E0E="
+              alt="image2"
             />
           </div>
           <div>
             <img
               style={contentStyle}
               src="https://media.istockphoto.com/photos/church-bouquets-picture-id155421318?k=20&m=155421318&s=612x612&w=0&h=gPXP-mGFRro48nCI_8Di5emPWjAOZjuWoWmPnbG6pl4="
-              alt="churchDecor"
+              alt="image3"
             />
           </div>
           <div>
             <img
               style={contentStyle}
               src="https://media.istockphoto.com/photos/table-setting-at-a-luxury-wedding-reception-picture-id521802660?k=20&m=521802660&s=612x612&w=0&h=oD7qeaGwWayeSld5xsI-gkIhZUhOdDYlfnvRNDyBqZg="
-              alt="diningDecor"
+              alt="image4"
+            />
+          </div>
+          <div>
+            <img
+              style={contentStyle}
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP_3vOY2F-h7JwPNLwJdE4OdB7C70RqG2M_g&usqp=CAU"
+              alt="image5"
+            />
+          </div>
+          <div>
+            <img
+              style={contentStyle}
+              src="https://www.chuckecheese.com/wp-content/uploads/2022/03/CEC-710x480_PartyLandingPage_GetThisPartyStarted_VH.png"
+              alt="image6"
+            />
+          </div>
+          <div>
+            <img
+              style={contentStyle}
+              src="https://s3-us-west-2.amazonaws.com/melingoimages/Images/69813.jpg"
+              alt="image7"
+            />
+          </div>
+          <div>
+            <img
+              style={contentStyle}
+              src="https://media.istockphoto.com/photos/table-setting-at-a-luxury-wedding-reception-picture-id521802660?k=20&m=521802660&s=612x612&w=0&h=oD7qeaGwWayeSld5xsI-gkIhZUhOdDYlfnvRNDyBqZg="
+              alt="image8"
             />
           </div>
         </Carousel>
