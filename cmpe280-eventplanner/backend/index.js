@@ -98,28 +98,37 @@ router.route("/createUser").post((req, res) => {
     });
 });
 
-router.route("/login").post(async (req, res) => {
-  const { userName, password } = req.body;
-  const loginData = await DB.newuser.findAll({
-    where: {
-      email: userName,
-      password: password,
-    },
-  });
-
-  if (loginData.length == 0) {
-    return res.status(404).send({
-      error: true,
-      errorMessage: "User not authorized",
+router.route("/login").get((req, res) => {
+  const userName = req.query.user_name;
+  DB.newuser
+    .findAll({
+      attributes: ["user_id"],
+      where: {
+        email: userName,
+        password: `${req.query.password}`,
+      },
+    })
+    .then((results) => {
+      const userId = results[0]?.dataValues?.user_id;
+      if (!userId) {
+        return res.status(404).send({
+          error: true,
+          errorMessage: "User not authorized",
+        });
+      } else {
+        const token = createToken(req.query.user_name);
+        res.status(200).send({
+          error: false,
+          token,
+          userName,
+          userId,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log("Could not login. Please check credentials.", err);
+      return res.status(400).send("Could not login. Please check credentials.");
     });
-  }
-
-  const token = createToken(userName);
-  return res.status(200).send({
-    error: false,
-    token,
-    userName,
-  });
 });
 
 router.route("/postReview").post((req, res) => {
