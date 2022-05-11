@@ -20,6 +20,26 @@ router.get("/", (req, res) => {
 
 router.route("/booking").get((req, res) => {
   DB.Booking.findAll()
+  DB.Booking.findAll({
+    attributes: [
+      "booking_id",
+      "event_type",
+      "guest_count",
+      "event_date",
+      "event_time",
+      "city",
+      "address",
+      "cuisine",
+      "decoration",
+      "photography",
+      "videography",
+      "music",
+      "total_cost",
+    ],
+    where: {
+      user_id: `${req.query.user_id}`,
+    },
+  })
     .then((booking) => res.json(booking))
     .catch((err) => {
       console.log(err);
