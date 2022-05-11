@@ -67,9 +67,26 @@ const newuser = sequelize.define(
   }
 );
 
+const review = sequelize.define(
+  "review",
+  {
+    review_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    comment: DataTypes.STRING, 
+    rating: DataTypes.INTEGER,
+    commented_by: DataTypes.STRING,
+  },
+  {
+    tableName: "Review",
+    timestamps: false,
+  }
+);
 
 module.exports = {
   sequelize,
   Booking,
   newuser,
+  review,
 };

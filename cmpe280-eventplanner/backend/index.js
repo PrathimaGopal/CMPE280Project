@@ -3,7 +3,6 @@ const router = express.Router();
 const DB = require("./model");
 const config = require("./config");
 const jwt = require("jsonwebtoken");
-const { username } = require("./config");
 const JWT_SECRET = "mysecret";
 
 const createToken = (email) => {
@@ -20,26 +19,7 @@ router.get("/", (req, res) => {
 });
 
 router.route("/booking").get((req, res) => {
-  DB.Booking.findAll({
-    attributes: [
-      "booking_id",
-      "event_type",
-      "guest_count",
-      "event_date",
-      "event_time",
-      "city",
-      "address",
-      "cuisine",
-      "decoration",
-      "photography",
-      "videography",
-      "music",
-      "total_cost",
-    ],
-    where: {
-      user_id: `${req.query.user_id}`,
-    },
-  })
+  DB.Booking.findAll()
     .then((booking) => res.json(booking))
     .catch((err) => {
       console.log(err);
@@ -98,36 +78,52 @@ router.route("/createUser").post((req, res) => {
     });
 });
 
-router.route("/login").get((req, res) => {
-  const userName = req.query.user_name;
-  DB.newuser
-    .findAll({
-      attributes: ["user_id"],
-      where: {
-        email: userName,
-        password: `${req.query.password}`,
-      },
+router.route("/login").post(async (req, res) => {
+  const { userName, password } = req.body;
+  const loginData = await DB.newuser.findAll({
+    where: {
+      email: userName,
+      password: password,
+    },
+  });
+
+  if (loginData.length == 0) {
+    return res.status(404).send({
+      error: true,
+      errorMessage: "User not authorized",
+    });
+  }
+
+  const token = createToken(userName);
+  return res.status(200).send({
+    error: false,
+    token,
+    userName,
+  });
+});
+
+router.route("/postReview").post((req, res) => {
+  console.log("***********", req.body);
+  DB.review
+    .create({
+      comment: req.body.comment,
+      rating: req.body.rating,
+      commented_by: req.body.commented_by,
     })
-    .then((results) => {
-      const userId = results[0]?.dataValues?.user_id;
-      if (!userId) {
-        return res.status(404).send({
-          error: true,
-          errorMessage: "User not authorized",
-        });
-      } else {
-        const token = createToken(req.query.user_name);
-        res.status(200).send({
-          error: false,
-          token,
-          userName,
-          userId,
-        });
-      }
-    })
+    .then((results) => res.status(200).send(results))
     .catch((err) => {
-      console.log("Could not login. Please check credentials.", err);
-      return res.status(400).send("Could not login. Please check credentials.");
+      console.log("Could not submit review for user. Please try again.", err);
+      return res
+        .status(400)
+        .send("Could not submit review for new user. Please try again.");
+    });
+});
+
+router.route("/reviewdata").get((req, res) => {
+  DB.review.findAll()
+    .then((cmntdata) => res.json(cmntdata))
+    .catch((err) => {
+      console.log(err);
     });
 });
 
