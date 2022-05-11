@@ -9,8 +9,8 @@ import "antd/dist/antd.min.css";
 import { Drawer, Input, Button, Typography, Result, Space } from "antd";
 import url from "../../urlconfig";
 import axios from "axios";
-
 import { FastForwardFilled, FastBackwardFilled } from "@ant-design/icons";
+
 
 export default function Events(props) {
   useEffect(() => {
@@ -20,16 +20,18 @@ export default function Events(props) {
 
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
-
   console.log(page);
 
   const resetData = () => {
     return {
       eventType: "",
+      theme:"",
+      themePrice:0,
       eventSpace: "",
       address: "",
       city: "",
-      guestCount: "",
+      guestCount:1,
+      cateringPrices:0,
       eventDate: "",
       eventTime: "",
       cuisine: "",
@@ -37,11 +39,13 @@ export default function Events(props) {
       photography: "No",
       videography: "No",
       music: "No",
+      totalprice:0
     };
   };
-
+  
   const [formData, setFormData] = useState(resetData());
-
+  const [cartData,setCartData]=useState([]);
+  
   const FormTitles = ["Event Details", "Catering", "Decoration", "Addons"];
   const NavTitles = ["Events", "Catering", "Decoration", "Addons", "Payment"];
 
@@ -55,9 +59,9 @@ export default function Events(props) {
   const [cardCVV, setCardCVV] = useState();
 
   const hideContents = () => {
-    setContentVisible(false);
+    setContentVisible(false);  
   };
-
+  
   const showResults = () => {
     hideContents();
     setResultVisible(true);
@@ -84,6 +88,8 @@ export default function Events(props) {
           visible={contentVisible}
           formData={formData}
           setFormData={setFormData}
+          cartData={cartData}
+          setCartData={setCartData}
         />
       );
     } else if (page === 1) {
@@ -92,6 +98,8 @@ export default function Events(props) {
           visible={contentVisible}
           formData={formData}
           setFormData={setFormData}
+          cartData={cartData}
+          setCartData={setCartData}
         />
       );
     } else if (page === 2) {
@@ -100,6 +108,8 @@ export default function Events(props) {
           visible={contentVisible}
           formData={formData}
           setFormData={setFormData}
+          cartData={cartData}
+          setCartData={setCartData}
         />
       );
     } else if (page === 3) {
@@ -108,11 +118,13 @@ export default function Events(props) {
           visible={contentVisible}
           formData={formData}
           setFormData={setFormData}
+          cartData={cartData}
+          setCartData={setCartData}
         />
       );
     }
   };
-
+  console.log("Add",cartData)
   const createBooking = () => {
     axios({
       url: `${url}/createBooking`,
@@ -126,12 +138,12 @@ export default function Events(props) {
         event_time: formData.eventTime,
         city: formData.city,
         address: formData.address,
-        cuisine: "Thai Menu",
-        decoration: "Beach Wedding",
+        cuisine: formData.cuisine,
+        decoration: formData.decoration,
         photography: formData.photography,
         videography: formData.videography,
         music: formData.music,
-        total_cost: 1000,
+        total_cost:cartData.reduce((sum,product)=>(sum+=product.price),0),
       },
     })
       .then((res) => {
@@ -153,7 +165,6 @@ export default function Events(props) {
   };
 
   const showButton = () => {
-    // console.log(cardNumber, cardCVV);
     return cardNumber && cardHolderName && cardExpiry && cardCVV
       ? ""
       : "disabled";
@@ -259,7 +270,7 @@ export default function Events(props) {
             </Space>
             <Space direction="horizontal">
               <Text style={{ marginRight: "5px" }}>Total Cost:</Text>
-              <Text>1000</Text>
+              <Text>${cartData.reduce((sum,product)=>(sum+=product.price),0)}</Text>
             </Space>
           </Space>
           <br />
@@ -302,6 +313,7 @@ export default function Events(props) {
             Complete Payment
           </Button>
         </Drawer>
+        ;
       </div>
     );
   };

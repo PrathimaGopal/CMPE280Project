@@ -5,6 +5,7 @@ import { Carousel, Checkbox, Divider } from "antd";
 export default function Addons(props) {
   const CheckboxGroup = Checkbox.Group;
   const plainOptions = ["Photography", "Videography", "Music"];
+  const AddonPrice={Photography:300,Videography:400,Music:100}
   const defaultCheckedList = () => {
     const arr = [];
     props.formData.photography === "Yes" ? arr.push("Photography") : arr.push();
@@ -12,7 +13,7 @@ export default function Addons(props) {
     props.formData.music === "Yes" ? arr.push("Music") : arr.push();
     return arr;
   };
-
+  console.log("check",defaultCheckedList)
   const [checkedList, setCheckedList] = React.useState(defaultCheckedList);
   const [indeterminate, setIndeterminate] = React.useState(
     props.formData.photography === "No" ||
@@ -24,9 +25,34 @@ export default function Addons(props) {
       props.formData.videography === "Yes" &&
       props.formData.music === "Yes"
   );
+  let arr=[...props.cartData]
+  const totalCart=(list,plainOptions)=>{
+   for(let i in plainOptions){
+      arr=arr.filter(item=>item.title!==plainOptions[i])
+   }
+   list.map(item=>{
+      arr.push({title:item,price:AddonPrice[item]})
+  })
+  props.setCartData([...arr])
+  }
 
+  const addonAllCart=(plainOptions)=>{
+   for(let i in plainOptions){
+      arr=arr.filter(item=>item.title!==plainOptions[i])
+   }
+  
+  plainOptions.map(item=>{
+      arr.push({title:item,price:AddonPrice[item]})
+  })
+  props.setCartData([...arr])
+  }
+ const removeAllAddon=(plainOptions)=>{
+   for(let i in plainOptions){
+      arr=arr.filter(item=>item.title!==plainOptions[i])
+   }
+   props.setCartData([...arr])
+ }
   const onChange = (list) => {
-    console.log(list);
     // Reset the prop values
     props.setFormData({
       ...props.formData,
@@ -34,26 +60,33 @@ export default function Addons(props) {
       videography: "No",
       music: "No",
     });
+    totalCart(list,plainOptions)
     setCheckedList(list);
     setIndeterminate(!!list.length && list.length < plainOptions.length);
     setCheckAll(list.length === plainOptions.length);
     list.forEach((item) => {
+      
       if (item === "Photography") {
         props.setFormData({
           ...props.formData,
           photography: "Yes",
         });
+        
       } else if (item === "Videography") {
         props.setFormData({
           ...props.formData,
           videography: "Yes",
         });
+       
       } else if (item === "Music") {
         props.setFormData({
           ...props.formData,
           music: "Yes",
         });
+       
       }
+     
+       
     });
   };
 
@@ -65,6 +98,8 @@ export default function Addons(props) {
         videography: "Yes",
         music: "Yes",
       });
+      addonAllCart(plainOptions)
+     
     } else {
       props.setFormData({
         ...props.formData,
@@ -72,6 +107,7 @@ export default function Addons(props) {
         videography: "No",
         music: "No",
       });
+      removeAllAddon(plainOptions)
     }
     setCheckedList(e.target.checked ? plainOptions : []);
     setIndeterminate(false);
@@ -98,7 +134,7 @@ export default function Addons(props) {
         value={checkedList}
         onChange={onChange}
       />
-      <br />
+            <br />
       <a
         href="https://www.instagram.com/david_monn/?utm_source=ig_embed&ig_rid=9836b39a-db06-4f51-998b-61005a7f9cfc"
         target="_blank"
@@ -110,7 +146,7 @@ export default function Addons(props) {
       <div style={{ width: "400px", height: "300px" }}>
         {" "}
         <Carousel autoplay>
-          <div>
+        <div>
             <img
               style={contentStyle}
               src="https://media.istockphoto.com/photos/table-setting-for-an-event-party-or-wedding-reception-picture-id479977238?k=20&m=479977238&s=612x612&w=0&h=6yuuuuHTvosXEGwlPTdY8V4N95issAzrTTQ9ZKN1w3E="
