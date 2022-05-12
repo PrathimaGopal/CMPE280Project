@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
 });
 
 router.route("/booking").get((req, res) => {
-  DB.Booking.findAll()
   DB.Booking.findAll({
     attributes: [
       "booking_id",
