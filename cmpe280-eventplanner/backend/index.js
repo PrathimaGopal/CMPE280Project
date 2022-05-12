@@ -3,7 +3,6 @@ const router = express.Router();
 const DB = require("./model");
 const config = require("./config");
 const jwt = require("jsonwebtoken");
-const { username } = require("./config");
 const JWT_SECRET = "mysecret";
 
 const createToken = (email) => {
@@ -128,6 +127,31 @@ router.route("/login").get((req, res) => {
     .catch((err) => {
       console.log("Could not login. Please check credentials.", err);
       return res.status(400).send("Could not login. Please check credentials.");
+    });
+});
+
+router.route("/postReview").post((req, res) => {
+  console.log("***********", req.body);
+  DB.review
+    .create({
+      comment: req.body.comment,
+      rating: req.body.rating,
+      commented_by: req.body.commented_by,
+    })
+    .then((results) => res.status(200).send(results))
+    .catch((err) => {
+      console.log("Could not submit review for user. Please try again.", err);
+      return res
+        .status(400)
+        .send("Could not submit review for new user. Please try again.");
+    });
+});
+
+router.route("/reviewdata").get((req, res) => {
+  DB.review.findAll()
+    .then((cmntdata) => res.json(cmntdata))
+    .catch((err) => {
+      console.log(err);
     });
 });
 
